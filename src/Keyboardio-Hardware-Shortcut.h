@@ -27,7 +27,7 @@
 
 typedef union {
   uint8_t rows[ROWS];
-  uint32_t all:44;
+  uint32_t all:28;
 } keydata_t;
 
 typedef struct {
