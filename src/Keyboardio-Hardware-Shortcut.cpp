@@ -56,8 +56,7 @@ void Shortcut::act_on_matrix_scan() {
 
             keyState = (bitRead(scanner.previousRightHandState.all, keynum) << 0) |
               (bitRead(scanner.rightHandState.all, keynum) << 1);
-
-            handle_key_event(Key_NoKey, row, col, keyState);
+            handle_key_event(Key_NoKey, row, COLS - col - 1, keyState);
         }
     }
 }
