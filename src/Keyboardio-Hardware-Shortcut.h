@@ -64,7 +64,7 @@ class Shortcut {
               ,r2c1       ,r2c3                                   ,r2ca       ,r2c8             \
                                                                                                 \
                                  ,r0c6                     ,r0cd                                \
-                           ,r1c6       ,r3c6         ,r3cd       ,r1cd                          \
+                           ,r1c6       ,r3c6         ,r1cd       ,r3cd                          \
                                  ,r2c6                     ,r2cd                                \
                                                                                                 \
                           ,r2c5                                  ,r0cc                          \
