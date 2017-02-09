@@ -17,9 +17,16 @@
  */
 
 #include "KeyboardioFirmware.h"
+#include "Keyboardio-MouseKeys.h"
+
+#define Key_LSBrck Key_LSquareBracket
+#define Key_RSBrck Key_RSquareBracket
+#define Key_MBtnL  Key_mouseBtnL
+#define Key_MBtnR  Key_mouseBtnR
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
-  /*
+  /* 0 - Base layer
+   *
    *                   ,-----.                                                   ,-----.
    *             ,-----+  E  +-----------.                           ,-----------|  I  |-----.
    *       ,-----|  W  |-----|  R  |  T  |                           |  Y  |  U  |-----|  O  |-----.
@@ -28,11 +35,11 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    * `-----|  Z  |-----|  C  |-----+-----'                           `-----+-----|  N  |-----| , < |-----'
    *       `-----|  X  |-----|  V  |       ,-------.       ,-------.       |  B  |-----|  M  |-----'
    *             `-----'     `-----'       |       |       |       |       `-----'     `-----'
-   *                                       |  Fn1  |       |  Tab  |
-   *                            ,-------.  | Lock  |       |       |  ,-------.
+   *                                       |       |       |  Tab  |
+   *                            ,-------.  |  Fn1  |       |       |  ,-------.
    *                            |S Ctl A|  `-------'       `-------'  |E AGr B|
    *                            |f     l|                             |n     s|
-   *                            |t Fn0 t|                             |t SPC p|
+   *                            |t Fn1 t|                             |t SPC p|
    *                            `-------'                             `-------'
    */
   [0] = KEYMAP
@@ -44,19 +51,59 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
           ,Key_Z        ,Key_C                                                   ,Key_N        ,Key_Comma
                  ,Key_X        ,Key_V                                     ,Key_B        ,Key_M
 
-                        ,Key_Keymap1                                ,Key_Tab
-           ,Key_Keymap1              ,Key_Keymap1          ,Key_Tab          ,Key_Tab
+                        ,Key_NoKey                                  ,Key_Tab
+           ,Key_NoKey                ,Key_NoKey            ,Key_Tab        ,Key_Tab
                         ,Key_Keymap1                                ,Key_Tab
 
                  ,Key_LCtrl                                               ,Key_RAlt
      ,Key_LShift               ,Key_LAlt                       ,Key_Enter           ,Key_Backspace
-                 ,Key_Keymap0_Momentary                                   ,Key_Space
+                 ,Key_Keymap1_Momentary                                   ,Key_Space
+  ),
+  /* 1 - Number & symbol layer
+   *
+   *                   ,-----.                                                   ,-----.
+   *             ,-----+  3  +-----------.                           ,-----------|  8  |-----.
+   *       ,-----|  2  |-----|  4  |  5  |                           |  6  |  7  |-----|  9  |-----.
+   * ,-----|  1  |-----|  '  |-----+-----|                           |-----+-----|  [  |-----|  0  |-----.
+   * | Esc |-----|  `  |-----|  /  |  \  |                           |  =  |  -  |-----|  ]  |-----|     |
+   * `-----| Lft |-----| Up  |-----+-----'                           `-----+-----|RClk |-----| End |-----'
+   *       `-----| Dn  |-----| Rgt |       ,-------.       ,-------.       |LClk |-----| Home|-----'
+   *             `-----'     `-----'       |       |       |M MUp M|       `-----'     `-----'
+   *                                       |       |       |L     R|
+   *                            ,-------.  |  Fn0  |       |t Mdn g|  ,-------.
+   *                            |S Ctl A|  `-------'       `-------'  |S AGr D|
+   *                            |f     l|                             |f     e|
+   *                            |t Fn0 t|                             |t Cnt l|
+   *                            `-------'                             `-------'
+   */
+  [1] = KEYMAP
+  (
+                         Key_3                                                            ,Key_8
+                 ,Key_2        ,Key_4     ,Key_5                       ,Key_6      ,Key_7        ,Key_9
+          ,Key_1        ,Key_Quote                                                        ,Key_LSBrck   ,Key_0
+   ,Key_Esc      ,Key_Backtick ,Key_Slash ,Key_Backslash               ,Key_Equals ,Key_Minus    ,Key_RSBrck       ,Key_NoKey
+          ,Key_LArrow   ,Key_UpArrow                                                      ,Key_MBtnR    ,Key_End
+                 ,Key_DnArrow  ,Key_RArrow                                         ,Key_MBtnL    ,Key_Home
+
+                        ,___                                           ,Key_mouseUp
+           ,___                      ,___                     ,Key_mouseL        ,Key_mouseR
+                        ,___                                           ,Key_mouseDn
+
+                 ,Key_LCtrl                                                  ,Key_RAlt
+     ,Key_LShift               ,Key_LAlt                          ,Key_RShift          ,Key_Delete
+                 ,___                                                        ,Key_RCtrl
   )
+
 };
 
 void setup () {
   Serial.begin(9600);
+
+  Mouse.begin ();
+  AbsoluteMouse.begin ();
+
   Keyboardio.setup (KEYMAP_SIZE);
+  Keyboardio.use (&MouseKeys, NULL);
 }
 
 void loop () {
