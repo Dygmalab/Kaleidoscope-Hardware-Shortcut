@@ -19,54 +19,39 @@
 #include "KeyboardioFirmware.h"
 
 const Key keymaps[][ROWS][COLS] PROGMEM = {
-  [0] = KEYMAP_STACKED
+  /*
+   *                   ,-----.                                                   ,-----.
+   *             ,-----+  E  +-----------.                           ,-----------|  I  |-----.
+   *       ,-----|  W  |-----|  R  |  T  |                           |  Y  |  U  |-----|  O  |-----.
+   * ,-----|  A  |-----|  D  |-----+-----|                           |-----+-----|  K  |-----|  P  |-----.
+   * |  Q  |-----|  S  |-----|  F  |  G  |                           |  H  |  M  |-----|  L  |-----| . > |
+   * `-----|  Z  |-----|  C  |-----+-----'                           `-----+-----|  N  |-----| , < |-----'
+   *       `-----|  X  |-----|  V  |       ,-------.       ,-------.       |  B  |-----|  J  |-----'
+   *             `-----'     `-----'       |       |       |       |       `-----'     `-----'
+   *                                       |  Fn1  |       |  Tab  |
+   *                            ,-------.  | Lock  |       |       |  ,-------.
+   *                            |S Ctl A|  `-------'       `-------'  |E AGr B|
+   *                            |f     l|                             |n     s|
+   *                            |t Fn0 t|                             |t SPC p|
+   *                            `-------'                             `-------'
+   */
+  [0] = KEYMAP
   (
-           Key_W,       Key_E,       Key_R,       Key_T,
-           Key_Q,       Key_S,       Key_D,       Key_F,       Key_G,
-     Key_A,
-           Key_Z,       Key_X,       Key_C,       Key_V,
-              Key_Keymap1,
-           Key_NoKey, Key_NoKey,
-              Key_NoKey,
-              Key_NoKey,
-           Key_NoKey, Key_NoKey,
-              Key_NoKey,
+                         Key_E                                                   ,Key_I
+                 ,Key_W        ,Key_R ,Key_T                       ,Key_Y ,Key_U        ,Key_O
+          ,Key_A        ,Key_D                                                   ,Key_K        ,Key_P
+   ,Key_Q        ,Key_S        ,Key_F ,Key_G                       ,Key_H ,Key_M        ,Key_L            ,Key_Period
+          ,Key_Z        ,Key_C                                                   ,Key_N        ,Key_Comma
+                 ,Key_X        ,Key_V                                     ,Key_B        ,Key_J
 
-           Key_U,       Key_I,       Key_O,       Key_P,
-           Key_Y,       Key_H,       Key_J,       Key_K,       Key_L,
-     Key_Enter,
-           Key_B,       Key_N,       Key_M,       Key_NoKey,
-              Key_NoKey,
-           Key_NoKey, Key_NoKey,
-              Key_NoKey,
-              Key_NoKey,
-           Key_NoKey, Key_NoKey,
-              Key_NoKey
-  ),
-  [1] = KEYMAP_STACKED
-  (
-           Key_X,       Key_X,       Key_X,       Key_X,
-           Key_X,       Key_X,       Key_X,       Key_X,       Key_X,
-     Key_X,
-           Key_X,       Key_X,       Key_X,       Key_X,
-              Key_Keymap1,
-           Key_X, Key_X,
-              Key_X,
-              Key_X,
-           Key_X, Key_X,
-              Key_X,
+                        ,Key_Keymap1                                ,Key_Tab
+           ,Key_Keymap1              ,Key_Keymap1          ,Key_Tab          ,Key_Tab
+                        ,Key_Keymap1                                ,Key_Tab
 
-           Key_X,       Key_X,       Key_X,       Key_X,
-           Key_X,       Key_X,       Key_X,       Key_X,       Key_X,
-     Key_X,
-           Key_X,       Key_X,       Key_X,       Key_X,
-              Key_X,
-           Key_X, Key_X,
-              Key_X,
-              Key_X,
-           Key_X, Key_X,
-              Key_X
-  ),
+                 ,Key_LCtrl                                               ,Key_RAlt
+     ,Key_LShift               ,Key_LAlt                       ,Key_Enter           ,Key_Backspace
+                 ,Key_Keymap0_Momentary                                   ,Key_Space
+  )
 };
 
 void setup () {
