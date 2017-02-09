@@ -24,9 +24,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
    *             ,-----+  E  +-----------.                           ,-----------|  I  |-----.
    *       ,-----|  W  |-----|  R  |  T  |                           |  Y  |  U  |-----|  O  |-----.
    * ,-----|  A  |-----|  D  |-----+-----|                           |-----+-----|  K  |-----|  P  |-----.
-   * |  Q  |-----|  S  |-----|  F  |  G  |                           |  H  |  M  |-----|  L  |-----| . > |
+   * |  Q  |-----|  S  |-----|  F  |  G  |                           |  H  |  J  |-----|  L  |-----| . > |
    * `-----|  Z  |-----|  C  |-----+-----'                           `-----+-----|  N  |-----| , < |-----'
-   *       `-----|  X  |-----|  V  |       ,-------.       ,-------.       |  B  |-----|  J  |-----'
+   *       `-----|  X  |-----|  V  |       ,-------.       ,-------.       |  B  |-----|  M  |-----'
    *             `-----'     `-----'       |       |       |       |       `-----'     `-----'
    *                                       |  Fn1  |       |  Tab  |
    *                            ,-------.  | Lock  |       |       |  ,-------.
@@ -40,9 +40,9 @@ const Key keymaps[][ROWS][COLS] PROGMEM = {
                          Key_E                                                   ,Key_I
                  ,Key_W        ,Key_R ,Key_T                       ,Key_Y ,Key_U        ,Key_O
           ,Key_A        ,Key_D                                                   ,Key_K        ,Key_P
-   ,Key_Q        ,Key_S        ,Key_F ,Key_G                       ,Key_H ,Key_M        ,Key_L            ,Key_Period
+   ,Key_Q        ,Key_S        ,Key_F ,Key_G                       ,Key_H ,Key_J        ,Key_L            ,Key_Period
           ,Key_Z        ,Key_C                                                   ,Key_N        ,Key_Comma
-                 ,Key_X        ,Key_V                                     ,Key_B        ,Key_J
+                 ,Key_X        ,Key_V                                     ,Key_B        ,Key_M
 
                         ,Key_Keymap1                                ,Key_Tab
            ,Key_Keymap1              ,Key_Keymap1          ,Key_Tab          ,Key_Tab
