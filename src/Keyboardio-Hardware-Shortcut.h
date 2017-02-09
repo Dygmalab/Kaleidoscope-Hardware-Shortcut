@@ -19,16 +19,12 @@
 #pragma once
 
 #include <Arduino.h>
+#include <AtmegaScanner.h>
 
 #define HARDWARE_IMPLEMENTATION Shortcut
 
 #define COLS 14
 #define ROWS 4
-
-typedef union {
-  uint8_t rows[ROWS];
-  uint32_t all:28;
-} keydata_t;
 
 typedef struct {
   uint8_t b;
@@ -53,15 +49,8 @@ class Shortcut {
     uint8_t load_primary_layer(uint8_t layer_count);
     void save_primary_layer(uint8_t layer);
 
-    keydata_t leftHandState;
-    keydata_t rightHandState;
-    keydata_t previousLeftHandState;
-    keydata_t previousRightHandState;
   private:
-    void initCols(void);
-    void unselectRows(void);
-    void selectRow(uint8_t row);
-    uint16_t readCols(void);
+    AtmegaScanner<COLS, ROWS> scanner;
 };
 
 #define LED_COUNT 2
