@@ -56,24 +56,24 @@ class Shortcut {
 #define LED_COUNT 2
 
 #define KEYMAP(                                                                                 \
-                     r0c2                                               ,r0c9                   \
-              ,r0c1       ,r0c3 ,r0c4                       ,r0cb ,r0ca       ,r0c8             \
-        ,r0c0       ,r1c2                                               ,r1c9       ,r0c7       \
-  ,r2c0       ,r1c1       ,r1c3 ,r1c4                       ,r1cb ,r1ca       ,r1c8       ,r2c7 \
-        ,r1c0       ,r2c2                                               ,r2c9       ,r1c7       \
-              ,r2c1       ,r2c3                                   ,r2ca       ,r2c8             \
+                     r0c2                                               ,r0cb                   \
+              ,r0c1       ,r0c3 ,r0c4                       ,r0c9 ,r0ca       ,r0cc             \
+        ,r0c0       ,r1c2                                               ,r1cb       ,r0cd       \
+  ,r2c0       ,r1c1       ,r1c3 ,r1c4                       ,r1c9 ,r1ca       ,r1cc       ,r2cd \
+        ,r1c0       ,r2c2                                               ,r2cb       ,r1cd       \
+              ,r2c1       ,r2c3                                   ,r2ca       ,r2cc             \
                                                                                                 \
-                                 ,r0c6                     ,r0cd                                \
-                           ,r1c6       ,r3c6         ,r1cd       ,r3cd                          \
-                                 ,r2c6                     ,r2cd                                \
+                                 ,r0c6                     ,r0c7                                \
+                           ,r1c6       ,r3c6         ,r1c7       ,r3c7                          \
+                                 ,r2c6                     ,r2c7                                \
                                                                                                 \
-                          ,r2c5                                  ,r0cc                          \
-                    ,r3c5        ,r1c5                     ,r3cc       ,r1cc                    \
-                          ,r0c5                                  ,r2cc                          \
+                          ,r2c5                                  ,r2c8                          \
+                    ,r3c5        ,r1c5                     ,r3c8       ,r1c8                    \
+                          ,r0c5                                  ,r0c8                          \
  )                                                                                              \
  {                                                                                              \
-   {r0c0, r0c1, r0c2, r0c3, r0c4, r0c5, r0c6, r0cd, r2cc, r0cb, r0ca, r0c9, r0c8, r0c7},        \
-   {r1c0, r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1cd, r1cc, r1cb, r1ca, r1c9, r1c8, r1c7},        \
-   {r2c0, r2c1, r2c2, r2c3,  XXX, r2c5, r2c6, r2cd, r0cc,  XXX, r2ca, r2c9, r2c8, r2c7},        \
-   { XXX,  XXX,  XXX,  XXX,  XXX, r3c5, r3c6, r3cd, r3cc,  XXX,  XXX,  XXX,  XXX,  XXX}         \
+   {r0c0, r0c1, r0c2, r0c3, r0c4, r0c5, r0c6, r0c7, r0c8, r0c9, r0ca, r0cb, r0cc, r0cd},        \
+   {r1c0, r1c1, r1c2, r1c3, r1c4, r1c5, r1c6, r1c7, r1c8, r1c9, r1ca, r1cb, r1cc, r1cd},        \
+   {r2c0, r2c1, r2c2, r2c3,  XXX, r2c5, r2c6, r2c7, r2c8,  XXX, r2ca, r2cb, r2cc, r2cd},        \
+   { XXX,  XXX,  XXX,  XXX,  XXX, r3c5, r3c6, r3c7, r3c8,  XXX,  XXX,  XXX,  XXX,  XXX}         \
  }
