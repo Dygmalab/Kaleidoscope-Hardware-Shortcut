@@ -49,7 +49,6 @@ class Shortcut {
     uint8_t load_primary_layer(uint8_t layer_count);
     void save_primary_layer(uint8_t layer);
 
-  private:
     AtmegaScanner<COLS, ROWS> scanner;
 };
 
