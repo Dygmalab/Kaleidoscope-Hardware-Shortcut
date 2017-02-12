@@ -1,5 +1,5 @@
 /* -*- mode: c++ -*-
- * Keyboardio-Hardware-Shortcut -- Shortcut hardware support for KeyboardioFirmware
+ * Kaleidoscope-Hardware-Shortcut -- Shortcut hardware support for KaleidoscopeFirmware
  * Copyright (C) 2017  Gergely Nagy
  *
  * This program is free software: you can redistribute it and/or modify
@@ -16,8 +16,8 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "KeyboardioFirmware.h"
-#include "Keyboardio-MouseKeys.h"
+#include "Kaleidoscope.h"
+#include "Kaleidoscope-MouseKeys.h"
 
 #define Key_LSBrck Key_LSquareBracket
 #define Key_RSBrck Key_RSquareBracket
@@ -102,10 +102,10 @@ void setup () {
   Mouse.begin ();
   AbsoluteMouse.begin ();
 
-  Keyboardio.setup (KEYMAP_SIZE);
-  Keyboardio.use (&MouseKeys, NULL);
+  Kaleidoscope.setup (KEYMAP_SIZE);
+  Kaleidoscope.use (&MouseKeys, NULL);
 }
 
 void loop () {
-  Keyboardio.loop ();
+  Kaleidoscope.loop ();
 }
