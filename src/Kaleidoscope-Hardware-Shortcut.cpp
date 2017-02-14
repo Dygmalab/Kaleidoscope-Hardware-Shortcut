@@ -19,16 +19,24 @@
 #include <Kaleidoscope.h>
 #include <avr/wdt.h>
 #include <EEPROM.h>
+#include "Light_WS2812/light_ws2812.h"
 
 #define EEPROM_LAYER_LOCATION 0
 
 Shortcut::Shortcut(void) {
 }
 
+#define NUM_LEDS 16
+cRGB leds[NUM_LEDS];
+
 void Shortcut::setup(void) {
+  for(int i=0; i<NUM_LEDS;i++)
+    led_set_crgb_at(i, {0x20, 0x20, 0});
+  led_sync();
 }
 
 void Shortcut::led_set_crgb_at(uint8_t i, cRGB crgb) {
+    leds[i] = crgb;
 }
 
 void Shortcut::led_set_crgb_at(byte row, byte col, cRGB color) {
@@ -39,6 +47,7 @@ cRGB Shortcut::led_get_crgb_at(uint8_t i) {
 }
 
 void Shortcut::led_sync() {
+    ws2812_sendarray((uint8_t *)leds,sizeof(cRGB)*NUM_LEDS);
 }
 
 void Shortcut::read_matrix() {
