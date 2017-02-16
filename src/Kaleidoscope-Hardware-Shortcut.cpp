@@ -26,12 +26,9 @@
 Shortcut::Shortcut(void) {
 }
 
-#define NUM_LEDS 16
-cRGB leds[NUM_LEDS];
-
 void Shortcut::setup(void) {
-  for(int i=0; i<NUM_LEDS;i++)
-    led_set_crgb_at(i, {0x20, 0x20, 0});
+  for (int i = 0; i < LED_COUNT; i++)
+    led_set_crgb_at(i, CRGB(0, 0, 0));
   led_sync();
 }
 
@@ -43,11 +40,11 @@ void Shortcut::led_set_crgb_at(byte row, byte col, cRGB color) {
 }
 
 cRGB Shortcut::led_get_crgb_at(uint8_t i) {
-    return {0, 0, 0};
+    return leds[i];
 }
 
 void Shortcut::led_sync() {
-    ws2812_sendarray((uint8_t *)leds,sizeof(cRGB)*NUM_LEDS);
+    ws2812_sendarray((uint8_t *)leds,sizeof(cRGB) * LED_COUNT);
 }
 
 void Shortcut::read_matrix() {

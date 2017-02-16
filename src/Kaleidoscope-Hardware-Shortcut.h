@@ -27,10 +27,14 @@
 #define ROWS 4
 
 typedef struct {
-  uint8_t b;
   uint8_t g;
   uint8_t r;
+  uint8_t b;
 } cRGB;
+
+#define CRGB(r, g, b) (cRGB){g, r, b}
+
+#define LED_COUNT 16
 
 class Shortcut {
   public:
@@ -50,9 +54,10 @@ class Shortcut {
     void save_primary_layer(uint8_t layer);
 
     AtmegaScanner<COLS, ROWS> scanner;
-};
 
-#define LED_COUNT 2
+  private:
+    cRGB leds[LED_COUNT];
+};
 
 #define KEYMAP(                                                                                 \
                      r0c2                                               ,r0cb                   \
