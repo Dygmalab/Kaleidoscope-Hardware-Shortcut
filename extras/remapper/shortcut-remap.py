@@ -101,7 +101,7 @@ class KeymapParser:
         return "U:" + key
 
     def reArrangeLayer(self, a):
-        flat = (14 * 5) * ['XXX']
+        flat = (14 * 4) * ['XXX']
         for line in range(len(a)):
             for col in range(len(a[line])):
                 r, c = self.__arrangement[line][col]
