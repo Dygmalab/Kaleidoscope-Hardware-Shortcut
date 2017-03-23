@@ -54,6 +54,10 @@ class KeymapParser:
         'backspace': 'Backspace',
         'del': 'Del',
         'esc': 'Esc',
+        'caps': 'CapsLock',
+        'capsl': 'CapsLock',
+        'capl': 'CapsLock',
+        'cl': 'CapsLock',
     }
 
     __arrangement = [
@@ -116,25 +120,247 @@ class KeymapParser:
 
 
 class KeyCodeMapper:
-    __keyCodes = {
-        'XXX': 0,
-        '---': 255 * 256 + 255,
-        'Enter': 40,
-        'Esc': 41,
-        'Backspace': 42,
-        'Tab': 43,
-        'Space': 44,
-    }
+    __keyCodes = [
+        None,
+        None,
+        None,
+        None,
+        'A',
+        'B',
+        'C',
+        'D',
+        'E',
+        'F',
+        'G',
+        'H',
+        'I',
+        'J',
+        'K',
+        'L',
+        'M',
+        'N',
+        'O',
+        'P',
+        'Q',
+        'R',
+        'S',
+        'T',
+        'U',
+        'V',
+        'W',
+        'X',
+        'Y',
+        'Z',
+        '1',
+        '2',
+        '3',
+        '4',
+        '5',
+        '6',
+        '7',
+        '8',
+        '9',
+        '0',
+        'Enter',
+        'Esc',
+        'Backspace',
+        'Tab',
+        'Space',
+        '-',
+        '=',
+        '[',
+        ']',
+        '\\',
+        '#',
+        ';',
+        '\'',
+        '`',
+        ',',
+        '.',
+        '/',
+        'CapsLock',
+        'F1',
+        'F2',
+        'F3',
+        'F4',
+        'F5',
+        'F6',
+        'F7',
+        'F8',
+        'F9',
+        'F10',
+        'F11',
+        'F12',
+        'PrintScreen',
+        'ScrollLock',
+        'Pause',
+        'Insert',
+        'Home',
+        'PageUp',
+        'Del',
+        'End',
+        'PageDown',
+        'Right',
+        'Left',
+        'Down',
+        'Up',
+        'NumLock',
+        'KP/',
+        'KP*',
+        'KP-',
+        'KP+',
+        'KPEnter',
+        'KP1',
+        'KP2',
+        'KP3',
+        'KP4',
+        'KP5',
+        'KP6',
+        'KP7',
+        'KP8',
+        'KP9',
+        'KP0',
+        'KP.',
+        None,  # non-us \ and |
+        'App', # Application
+        'Power',
+        'KP=',
+        'F13',
+        'F14',
+        'F15',
+        'F16',
+        'F17',
+        'F18',
+        'F19',
+        'F20',
+        'F21',
+        'F22',
+        'F23',
+        'F24',
+        'Execute',
+        'Help',
+        'Menu',
+        'Select',
+        'Stop',
+        'Again',
+        'Undo',
+        'Cut',
+        'Copy',
+        'Paste',
+        'Find',
+        'Mute',
+        'VolUp',
+        'VolDown',
+        None,
+        None,
+        None, # Locking Caps, Num, Scroll
+        'KP,',
+        None, # KP=
+        None, # KB Int 1
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None, # KB int 9
+        None, # KB Lang 1
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None, # KB Lang 9
+        None, # alt erase
+        'SysRq',
+        'Cancel',
+        'Clear',
+        'Prior',
+        'Return',
+        'Separator',
+        'Out',
+        'Oper',
+        None, # clear / again
+        None, # crSel / props
+        None, # exsel
+        None, # 165 - reserved
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None,
+        None, # 175 - reserved
+        'KP00',
+        'KP000',
+        None, # thousand sep
+        None, # decimal sep
+        None, # currency
+        None, # currency sub
+        'KP(',
+        'KP)',
+        'KP{',
+        'KP}',
+        'KPTab',
+        'KPBackspace',
+        'KPA',
+        'KPB',
+        'KPC',
+        'KPD',
+        'KPE',
+        'KPF',
+        'KPXOR',
+        'KP^',
+        'KP%',
+        'KP<',
+        'KP>',
+        'KP&',
+        'KP&&',
+        'KP|',
+        'KP||',
+        'KP:',
+        'KP#',
+        'KPSpace',
+        'KP@',
+        'KP!',
+        None, # KP MS
+        None, # KP MR
+        None, # KP MC
+        None, # KP M+
+        None, # KP M-
+        None, # KP M*
+        None, # KP M/
+        None, # KP +/-
+        None, # KP Clear
+        None, # KP Clear entry
+        None, # KP Bin
+        None, # KP Oct
+        None, # KP Dec
+        None, # KP Hex
+        None, # Reserved
+        None, # Reserved
+        'LControl',
+        'LShift',
+        'LAlt',
+        'LGUI',
+        'RControl',
+        'RShift',
+        'RAlt',
+        'RGUI',
+    ]
     def toCode(self, key):
-        if (len(key) == 1):
-            if (key >= 'A' and key <= 'Z'):
-                return ord(key) - ord('A') + 4
-            if (key >= '1' and key <= '9'):
-                return ord(key) - ord('0') + 30
-            if key == '0':
-                return 39
+        if key == 'XXX':
+            return 0
+        if key == '---':
+            return 255 * 256 + 255;
         if key in self.__keyCodes:
-            return self.__keyCodes[key]
+            return self.__keyCodes.index (key)
 
         return 0
 
