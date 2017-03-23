@@ -50,10 +50,6 @@ class KeymapParser:
         'gui': 'LGUI',
         'lgui': 'LGUI',
         'rgui': 'RGUI',
-        '.': 'Dot',
-        ',': 'Comma',
-        '\'': 'Quote',
-        '`': 'Grave',
         'bsp': 'Backspace',
         'backspace': 'Backspace',
         'del': 'Del',
@@ -98,7 +94,7 @@ class KeymapParser:
         if key.lower() in self.__mapping:
             return self.__mapping[key.lower()]
 
-        return "U:" + key
+        return key
 
     def reArrangeLayer(self, a):
         flat = (14 * 4) * ['XXX']
