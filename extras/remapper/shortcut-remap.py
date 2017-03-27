@@ -98,6 +98,9 @@ class KeymapParser:
         if key.lower() in self.__mapping:
             return self.__mapping[key.lower()]
 
+        if key.lower().endswith ('*') and key.lower()[:-1] in self.__mapping:
+            return self.__mapping[key.lower()[:-1]] + '*'
+
         return key
 
     def reArrangeLayer(self, a):
@@ -354,15 +357,51 @@ class KeyCodeMapper:
         'RAlt',
         'RGUI',
     ]
+    MOMENTARY_OFFSET = 42;
+
+    # L<n>[*+]?: Layer <n>. * => one-shot; + => toggle; none => momentary
+    # Modifier* => oneshot
+
+    def OSL(self, layer):
+        # 0xc000 + 8
+        n = 0xc008 + layer
+        kc = n % 256
+        flags = (n - kc) / 256
+        return "{0} {1}".format (flags, kc)
+
+    def Layer(self, n):
+        return "68 {0}".format (n)
+
+    def OSM(self, mod):
+        n = 0xc000 + self.__keyCodes.index (mod) - self.__keyCodes.index ('LControl')
+        kc = n % 256
+        flags = (n - kc) / 256
+        return "{0} {1}".format (flags, kc)
+
     def toCode(self, key):
         if key == 'XXX':
-            return 0
+            return "0 0"
         if key == '---':
-            return 255 * 256 + 255;
+            return '255 255';
         if key in self.__keyCodes:
-            return self.__keyCodes.index (key)
+            return "0 {0}".format (self.__keyCodes.index (key))
 
-        return 0
+        # Layer keys
+        if re.match ("L(\d+)([\*\+]?)", key):
+            (layer, method) = re.search ("L(\d+)([\*\+]?)", key).groups ()
+            if method == "*":   # OneShot
+                return self.OSL(int(layer))
+            elif method == "+": # toggle
+                return self.Layer(int(layer))
+            else:               # momentary
+                return self.Layer(int(layer) + self.MOMENTARY_OFFSET)
+
+        # OSM
+        if re.match("([LR](Control|Shift|Alt|GUI))\*", key):
+            mod = re.search("([LR](Control|Shift|Alt|GUI))\*", key).groups()[0]
+            return self.OSM(mod)
+
+        return key
 
     def map(self, codes):
         return map (lambda k: str (self.toCode (k)), codes)
