@@ -27,6 +27,9 @@ Shortcut::Shortcut(void) {
 }
 
 void Shortcut::setup(void) {
+  wdt_disable();
+  delay(100);
+
   for (int i = 0; i < LED_COUNT; i++)
     led_set_crgb_at(i, CRGB(0, 0, 0));
   led_sync();
