@@ -31,55 +31,55 @@ void Shortcut::setup(void) {
   delay(100);
 
   for (int i = 0; i < LED_COUNT; i++)
-    led_set_crgb_at(i, CRGB(0, 0, 0));
-  led_sync();
+    setCrgbAt(i, CRGB(0, 0, 0));
+  syncLeds();
 }
 
-void Shortcut::led_set_crgb_at(uint8_t i, cRGB crgb) {
+void Shortcut::setCrgbAt(uint8_t i, cRGB crgb) {
     leds[i] = crgb;
 }
 
-void Shortcut::led_set_crgb_at(byte row, byte col, cRGB color) {
+void Shortcut::setCrgbAt(byte row, byte col, cRGB color) {
 }
 
-cRGB Shortcut::led_get_crgb_at(uint8_t i) {
+cRGB Shortcut::getCrgbAt(uint8_t i) {
     return leds[i];
 }
 
-void Shortcut::led_sync() {
+void Shortcut::syncLeds() {
     ws2812_sendarray((uint8_t *)leds,sizeof(cRGB) * LED_COUNT);
 }
 
-void Shortcut::read_matrix() {
+void Shortcut::readMatrix() {
     scanner.readKeys();
 }
 
-void Shortcut::act_on_matrix_scan() {
+void Shortcut::actOnMatrixScan() {
     for (byte row = 0; row < ROWS; row++) {
         for (byte col = 0; col < COLS / 2; col++) {
             uint8_t keynum = (row * (COLS / 2)) + col;
 
             uint8_t keyState = (bitRead(scanner.previousLeftHandState.all, keynum) << 0) |
               (bitRead(scanner.leftHandState.all, keynum) << 1);
-            handle_keyswitch_event(Key_NoKey, row, col, keyState);
+            handleKeyswitchEVent(Key_NoKey, row, col, keyState);
 
             keyState = (bitRead(scanner.previousRightHandState.all, keynum) << 0) |
               (bitRead(scanner.rightHandState.all, keynum) << 1);
-            handle_keyswitch_event(Key_NoKey, row, COLS / 2 + col, keyState);
+            handleKeyswitchEVent(Key_NoKey, row, COLS / 2 + col, keyState);
         }
     }
 }
 
-void Shortcut::scan_matrix() {
-    read_matrix();
-    act_on_matrix_scan();
+void Shortcut::scanMatrix() {
+    readMatrix();
+    actOnMatrixScan();
 }
 
-void Shortcut::save_primary_layer(uint8_t layer) {
+void Shortcut::savePrimaryLayer(uint8_t layer) {
     EEPROM.write(EEPROM_LAYER_LOCATION, layer);
 }
 
-uint8_t Shortcut::load_primary_layer(uint8_t layer_count) {
+uint8_t Shortcut::loadPrimaryLayer(uint8_t layer_count) {
     uint8_t layer =  EEPROM.read(EEPROM_LAYER_LOCATION);
     if (layer >= layer_count) {
         return 0; // undefined positions get saved as 255
