@@ -39,19 +39,19 @@ typedef struct {
 class Shortcut {
   public:
     Shortcut(void);
-    void led_sync(void);
-    void led_set_crgb_at(byte row, byte col, cRGB color);
-    void led_set_crgb_at(uint8_t i, cRGB crgb);
-    cRGB led_get_crgb_at(uint8_t i);
-    cRGB get_key_color(byte row, byte col);
+    void syncLeds(void);
+    void setCrgbAt(byte row, byte col, cRGB color);
+    void setCrgbAt(uint8_t i, cRGB crgb);
+    cRGB getCrgbAt(uint8_t i);
+    cRGB getKeyColor(byte row, byte col);
 
-    void scan_matrix(void);
-    void read_matrix(void);
-    void act_on_matrix_scan(void);
+    void scanMatrix(void);
+    void readMatrix(void);
+    void actOnMatrixScan(void);
     void setup();
 
-    uint8_t load_primary_layer(uint8_t layer_count);
-    void save_primary_layer(uint8_t layer);
+    uint8_t loadPrimaryLayer(uint8_t layer_count);
+    void savePrimaryLayer(uint8_t layer);
 
     AtmegaScanner<COLS, ROWS> scanner;
 
