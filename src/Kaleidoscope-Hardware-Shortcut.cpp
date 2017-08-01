@@ -61,11 +61,11 @@ void Shortcut::actOnMatrixScan() {
 
             uint8_t keyState = (bitRead(scanner.previousLeftHandState.all, keynum) << 0) |
               (bitRead(scanner.leftHandState.all, keynum) << 1);
-            handleKeyswitchEVent(Key_NoKey, row, col, keyState);
+            handleKeyswitchEvent(Key_NoKey, row, col, keyState);
 
             keyState = (bitRead(scanner.previousRightHandState.all, keynum) << 0) |
               (bitRead(scanner.rightHandState.all, keynum) << 1);
-            handleKeyswitchEVent(Key_NoKey, row, COLS / 2 + col, keyState);
+            handleKeyswitchEvent(Key_NoKey, row, COLS / 2 + col, keyState);
         }
     }
 }
