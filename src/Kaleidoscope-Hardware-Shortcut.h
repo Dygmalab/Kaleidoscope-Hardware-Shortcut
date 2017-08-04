@@ -50,8 +50,6 @@ class Shortcut {
     void actOnMatrixScan(void);
     void setup();
 
-    uint8_t loadPrimaryLayer(uint8_t layer_count);
-    void savePrimaryLayer(uint8_t layer);
 
     AtmegaScanner<COLS, ROWS> scanner;
 

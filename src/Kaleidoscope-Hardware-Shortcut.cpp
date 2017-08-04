@@ -21,7 +21,6 @@
 #include <EEPROM.h>
 #include "Light_WS2812/light_ws2812.h"
 
-#define EEPROM_LAYER_LOCATION 0
 
 Shortcut::Shortcut(void) {
 }
@@ -73,18 +72,6 @@ void Shortcut::actOnMatrixScan() {
 void Shortcut::scanMatrix() {
     readMatrix();
     actOnMatrixScan();
-}
-
-void Shortcut::savePrimaryLayer(uint8_t layer) {
-    EEPROM.write(EEPROM_LAYER_LOCATION, layer);
-}
-
-uint8_t Shortcut::loadPrimaryLayer(uint8_t layer_count) {
-    uint8_t layer =  EEPROM.read(EEPROM_LAYER_LOCATION);
-    if (layer >= layer_count) {
-        return 0; // undefined positions get saved as 255
-    }
-    return 0; //  return keymap;
 }
 
 HARDWARE_IMPLEMENTATION KeyboardHardware;
