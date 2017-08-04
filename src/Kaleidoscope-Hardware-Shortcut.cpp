@@ -21,6 +21,8 @@
 #include <EEPROM.h>
 #include "Light_WS2812/light_ws2812.h"
 
+uint32_t Shortcut::leftHandMask;
+uint32_t Shortcut::rightHandMask;
 
 Shortcut::Shortcut(void) {
 }
@@ -72,6 +74,44 @@ void Shortcut::actOnMatrixScan() {
 void Shortcut::scanMatrix() {
     readMatrix();
     actOnMatrixScan();
+}
+
+void Shortcut::maskKey(byte row, byte col) {
+  if (row >= ROWS || col >= COLS)
+    return;
+
+  if (col >= 8) {
+    rightHandMask |= SCANBIT(row, col - 8);
+  } else {
+    leftHandMask |= SCANBIT(row, col);
+  }
+}
+
+void Shortcut::unMaskKey(byte row, byte col) {
+  if (row >= ROWS || col >= COLS)
+    return;
+
+  if (col >= 8) {
+    rightHandMask &= ~(SCANBIT(row, col - 8));
+  } else {
+    leftHandMask &= ~(SCANBIT(row, col));
+  }
+}
+
+bool Shortcut::isKeyMasked(byte row, byte col) {
+  if (row >= ROWS || col >= COLS)
+    return false;
+
+  if (col >= 8) {
+    return rightHandMask & SCANBIT(row, col - 8);
+  } else {
+    return leftHandMask & SCANBIT(row, col);
+  }
+}
+
+void Shortcut::maskHeldKeys(void) {
+  rightHandMask = scanner.rightHandState.all;
+  leftHandMask = scanner.leftHandState.all;
 }
 
 HARDWARE_IMPLEMENTATION KeyboardHardware;
