@@ -37,18 +37,18 @@ void Shortcut::setup(void) {
 }
 
 void Shortcut::setCrgbAt(uint8_t i, cRGB crgb) {
-    leds[i] = crgb;
+    leds[i] = asCGRB(crgb);
 }
 
 void Shortcut::setCrgbAt(byte row, byte col, cRGB color) {
 }
 
 cRGB Shortcut::getCrgbAt(uint8_t i) {
-    return leds[i];
+    return asCRGB(leds[i]);
 }
 
 void Shortcut::syncLeds() {
-    ws2812_sendarray((uint8_t *)leds,sizeof(cRGB) * LED_COUNT);
+    ws2812_sendarray((uint8_t *)leds,sizeof(cGRB) * LED_COUNT);
 }
 
 void Shortcut::readMatrix() {

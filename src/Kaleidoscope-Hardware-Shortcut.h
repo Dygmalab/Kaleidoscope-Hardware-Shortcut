@@ -21,18 +21,11 @@
 #include <Arduino.h>
 #include <AtmegaScanner.h>
 
+#include "Kaleidoscope-Hardware.h"
 #define HARDWARE_IMPLEMENTATION Shortcut
 
 #define COLS 14
 #define ROWS 4
-
-typedef struct {
-  uint8_t g;
-  uint8_t r;
-  uint8_t b;
-} cRGB;
-
-#define CRGB(r, g, b) (cRGB){g, r, b}
 
 #define LED_COUNT 16
 
@@ -67,7 +60,7 @@ class Shortcut {
     AtmegaScanner<COLS, ROWS> scanner;
 
   private:
-    cRGB leds[LED_COUNT];
+    cGRB leds[LED_COUNT];
     static uint32_t leftHandMask;
     static uint32_t rightHandMask;
 };
