@@ -6,7 +6,9 @@ the [Shortcut][shortcut].
 A heavy work in progress, with obvious bugs, and missing features.
 
  [fw]: https://github.com/keyboardio/Kaleidoscope
- [shortcut]: http://shortcut.gg/
+ [Dygma]: http://dygma.com/
+
+[Schematic and Board layout](https://github.com/Dygmalab/Shortcut-Kicad-Schematic)
 
 ## License
 
